@@ -1,7 +1,7 @@
 name: scrollable_text_indicator
 description: A Flutter package that provides a scrollable text with vertical indicator.
 version: 0.0.1
-homepage:
+homepage: https://github.com/SlavisDEV/scrollable_text_indicator
 
 environment:
   sdk: '>=2.18.6 <3.0.0'

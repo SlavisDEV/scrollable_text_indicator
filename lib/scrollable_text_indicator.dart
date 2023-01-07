@@ -121,6 +121,7 @@ class _ScrollableTextIndicatorState extends State<ScrollableTextIndicator> {
   @override
   void dispose() {
     _scrollController.removeListener(_scrollListener);
+    _scrollController.dispose();
     super.dispose();
   }
 }
