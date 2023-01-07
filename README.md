@@ -9,7 +9,7 @@ A Flutter package that provides a scrollable text with vertical scroll indicator
 This package is fully cusotmizable. You are able to change text and its style, size, color of the indicator and its spacing as well.
 Here you can find example video and see it in the action.
 
-https://user-images.githubusercontent.com/52864127/211162404-cb9e4c03-80fe-44d0-8017-71fb1d18acc9.mp4
+![Scrollable Text Indicator](https://user-images.githubusercontent.com/52864127/211162955-c5aa97cd-c82b-4f04-b625-59cb6fc5a1f7.gif)
 
 ## Getting started
 
