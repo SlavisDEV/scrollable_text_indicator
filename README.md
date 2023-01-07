@@ -1,11 +1,15 @@
 # Scrollable Text Indicator
 
 [![pub package](https://img.shields.io/pub/v/scrollable_text_indicator.svg)](https://pub.dartlang.org/packages/scrollable_text_indicator)
+
 A Flutter package that provides a scrollable text with vertical scroll indicator - just like web browsers do.
  
 ## Features
 
-Here you can find example video and see the package in the action.
+This package is fully cusotmizable. You are able to change text and its style, size, color of the indicator and its spacing as well.
+Here you can find example video and see it in the action.
+
+https://user-images.githubusercontent.com/52864127/211162404-cb9e4c03-80fe-44d0-8017-71fb1d18acc9.mp4
 
 ## Getting started
 
