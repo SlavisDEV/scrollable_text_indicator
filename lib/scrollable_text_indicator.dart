@@ -2,12 +2,19 @@ import 'package:flutter/material.dart';
 import 'package:scrollable_text_indicator/size_reporting_widget.dart';
 
 class ScrollableTextIndicator extends StatefulWidget {
+  // The text to display
   final Text text;
+  // The width of the thumb
   final double indicatorThumbWidth;
+  // The height of the thumb
   final double indicatorThumbHeight;
+  // The width of the vertical line
   final double indicatorBarWidth;
+  // The spacing between the text and the scroll indicator
   final double indicatorSpacing;
+  // The color of the thumb
   final Color indicatorThumbColor;
+  // The color of the vertical line
   final Color indicatorBarColor;
 
   const ScrollableTextIndicator({
