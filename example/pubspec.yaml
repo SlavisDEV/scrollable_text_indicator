@@ -12,7 +12,8 @@ dependencies:
   flutter:
     sdk: flutter
   cupertino_icons: ^1.0.5
-  scrollable_text_indicator: ^0.0.1
+  scrollable_text_indicator:
+    path: ../
 
 dev_dependencies:
   flutter_test:
