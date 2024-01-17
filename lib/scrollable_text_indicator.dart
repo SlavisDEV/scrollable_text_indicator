@@ -4,16 +4,22 @@ import 'package:scrollable_text_indicator/size_reporting_widget.dart';
 class ScrollableTextIndicator extends StatefulWidget {
   // The text to display
   final Text text;
+
   // The width of the thumb
   final double indicatorThumbWidth;
+
   // The height of the thumb
   final double indicatorThumbHeight;
+
   // The width of the vertical line
   final double indicatorBarWidth;
+
   // The spacing between the text and the scroll indicator
   final double indicatorSpacing;
+
   // The color of the thumb
   final Color indicatorThumbColor;
+
   // The color of the vertical line
   final Color indicatorBarColor;
 
@@ -39,17 +45,33 @@ class _ScrollableTextIndicatorState extends State<ScrollableTextIndicator> {
   double _scrollTopOffset = 0.0;
   double? _scrollBarHeight;
   double? _textHeight;
+
   double get _scrollMaxPosition => _scrollBarHeight == null
       ? 0
       : _scrollBarHeight! - widget.indicatorThumbHeight;
+
   double get _scrollRange => (_textHeight ?? 0.0) > (_scrollBarHeight ?? 0.0)
       ? _textHeight! - _scrollBarHeight!
       : 0.0;
+
+  bool isScrollable = true;
 
   @override
   void initState() {
     super.initState();
     _scrollController.addListener(_scrollListener);
+
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      _setIsScrollable();
+    });
+  }
+
+  _setIsScrollable() {
+    if (_scrollController.hasClients) {
+      setState(() {
+        isScrollable = _scrollController.position.maxScrollExtent > 0;
+      });
+    }
   }
 
   void _scrollListener() {
@@ -58,6 +80,7 @@ class _ScrollableTextIndicatorState extends State<ScrollableTextIndicator> {
     if (!mounted) {
       return;
     }
+
     setState(() {
       _scrollTopOffset = _scrollController.offset * factor;
     });
@@ -80,46 +103,50 @@ class _ScrollableTextIndicatorState extends State<ScrollableTextIndicator> {
                   setState(() {
                     _textHeight = size.height;
                   });
+                  _setIsScrollable();
                 },
               ),
             ),
           ),
-          SizedBox(
-            width: widget.indicatorSpacing,
-          ),
-          SizedBox(
-            width: widget.indicatorThumbWidth,
-            child: Stack(
-              alignment: Alignment.topCenter,
-              children: [
-                SizeReportingWidget(
-                  child: Container(
-                    width: widget.indicatorBarWidth,
-                    color: widget.indicatorBarColor,
-                  ),
-                  onSizeChange: (size) {
-                    if (!mounted) {
-                      return;
-                    }
-                    setState(() {
-                      _scrollBarHeight = size.height;
-                    });
-                  },
-                ),
-                Positioned(
-                  top: _scrollTopOffset,
-                  left: 0.0,
-                  right: 0.0,
-                  height: widget.indicatorThumbHeight,
-                  child: Container(
-                    width: widget.indicatorThumbWidth,
-                    height: widget.indicatorThumbHeight,
-                    color: widget.indicatorThumbColor,
-                  ),
-                ),
-              ],
+          if (isScrollable)
+            SizedBox(
+              width: widget.indicatorSpacing,
             ),
-          )
+          if (isScrollable)
+            SizedBox(
+              width: widget.indicatorThumbWidth,
+              child: Stack(
+                alignment: Alignment.topCenter,
+                children: [
+                  SizeReportingWidget(
+                    child: Container(
+                      width: widget.indicatorBarWidth,
+                      color: widget.indicatorBarColor,
+                    ),
+                    onSizeChange: (size) {
+                      if (!mounted) {
+                        return;
+                      }
+                      setState(() {
+                        _scrollBarHeight = size.height;
+                      });
+                      _setIsScrollable();
+                    },
+                  ),
+                  Positioned(
+                    top: _scrollTopOffset,
+                    left: 0.0,
+                    right: 0.0,
+                    height: widget.indicatorThumbHeight,
+                    child: Container(
+                      width: widget.indicatorThumbWidth,
+                      height: widget.indicatorThumbHeight,
+                      color: widget.indicatorThumbColor,
+                    ),
+                  ),
+                ],
+              ),
+            )
         ],
       ),
     );
